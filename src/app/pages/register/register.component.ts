@@ -115,21 +115,29 @@ export class RegisterComponent implements OnInit {
           this.password,
           this.accountTypeSelected
         )
-        .subscribe((json) => {
-          if (
-            json.username != '' &&
-            json.username != null &&
-            json.username != undefined
-          ) {
-            this.toastr.success(
-              'Ora puoi accedere alla tua dashboard',
-              'Successo!'
+        .subscribe(
+          (json) => {
+            if (
+              json.username != '' &&
+              json.username != null &&
+              json.username != undefined
+            ) {
+              this.toastr.success(
+                'Ora puoi accedere alla tua dashboard',
+                'Successo!'
+              );
+              setInterval(() => {
+                this.router.navigate(['/login']);
+              }, 3000);
+            }
+          },
+          (err) => {
+            this.toastr.warning(
+              'La mail è già stata utilizzata',
+              'Attenzione!'
             );
-            setInterval(() => {
-              this.router.navigate(['/login']);
-            }, 3000);
           }
-        });
+        );
     }
   }
 }
