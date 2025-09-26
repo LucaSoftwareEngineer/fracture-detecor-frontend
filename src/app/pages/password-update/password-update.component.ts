@@ -1,7 +1,7 @@
 import { PasswordUpdateRequest } from './../../interfaces/PasswordUpdateRequest';
 import { PasswordUpdateResponse } from '../../interfaces/PasswordUpdateResponse';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,11 +14,13 @@ import { ResetPasswordService } from '../../services/reset.password.service';
   templateUrl: './password-update.component.html',
   styleUrl: './password-update.component.css',
 })
-export class PasswordUpdateComponent {
+export class PasswordUpdateComponent implements OnInit {
   username: string = '';
   emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   password: string = '';
+  passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   confirmPassword: string = '';
   opt: string = '';
 
@@ -28,6 +30,8 @@ export class PasswordUpdateComponent {
     private router: Router
   ) {}
 
+  ngOnInit(): void {}
+
   update() {
     let nErr = 0;
 
@@ -36,7 +40,7 @@ export class PasswordUpdateComponent {
       nErr++;
     }
 
-    if (!this.emailRegex.test(this.username)) {
+    if (!this.emailRegex.test(this.username) && this.username != '') {
       this.toastr.warning(
         'Inserisci un indirizzo email valido...',
         'Attenzione!'
@@ -46,6 +50,14 @@ export class PasswordUpdateComponent {
 
     if (this.password == '') {
       this.toastr.warning('Inserisci la password...', 'Attenzione!');
+      nErr++;
+    }
+
+    if (!this.passwordRegex.test(this.password) && this.password != '') {
+      this.toastr.warning(
+        'La password deve contenere \n1 carattere maiuscolo, \n1 carattere minuscolo, \n1 numero, \n1 carattere speciale, \ne deve avere almeno 8 caratteri...',
+        'Attenzione!'
+      );
       nErr++;
     }
 
@@ -82,9 +94,6 @@ export class PasswordUpdateComponent {
       this.resetPasswordService.update(json).subscribe(
         (res) => {
           this.toastr.success('Password modificata correttamente', 'Successo!');
-          setInterval(() => {
-            this.router.navigate(['/login']);
-          }, 3000);
         },
         (error) => {
           this.toastr.warning(

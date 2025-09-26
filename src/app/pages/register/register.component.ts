@@ -21,6 +21,8 @@ export class RegisterComponent implements OnInit {
   emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   password: string = '';
+  passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   confirmPassword: string = '';
   acceptGdprAndPrivacy: boolean = false;
   accountTypeSelected = 0;
@@ -61,7 +63,7 @@ export class RegisterComponent implements OnInit {
       nErr++;
     }
 
-    if (!this.emailRegex.test(this.username)) {
+    if (!this.emailRegex.test(this.username) && this.username != '') {
       this.toastr.warning(
         'Inserisci un indirizzo email valido...',
         'Attenzione!'
@@ -71,6 +73,14 @@ export class RegisterComponent implements OnInit {
 
     if (this.password == '') {
       this.toastr.warning('Inserisci la password...', 'Attenzione!');
+      nErr++;
+    }
+
+    if (!this.passwordRegex.test(this.password) && this.password != '') {
+      this.toastr.warning(
+        'La password deve contenere \n1 carattere maiuscolo, \n1 carattere minuscolo, \n1 numero, \n1 carattere speciale, \ne deve avere almeno 8 caratteri...',
+        'Attenzione!'
+      );
       nErr++;
     }
 
@@ -126,9 +136,6 @@ export class RegisterComponent implements OnInit {
                 'Ora puoi accedere alla tua dashboard',
                 'Successo!'
               );
-              setInterval(() => {
-                this.router.navigate(['/login']);
-              }, 3000);
             }
           },
           (err) => {

@@ -1,7 +1,7 @@
 import { PasswordResetRequest } from './../../interfaces/PasswordResetRequest';
 import { ResetPasswordService } from './../../services/reset.password.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './password-reset.component.html',
   styleUrl: './password-reset.component.css',
 })
-export class PasswordResetComponent {
+export class PasswordResetComponent implements OnInit {
   username: string = '';
 
   constructor(
@@ -21,6 +21,8 @@ export class PasswordResetComponent {
     private toastr: ToastrService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {}
 
   reset() {
     const json: PasswordResetRequest = {
@@ -32,9 +34,6 @@ export class PasswordResetComponent {
           'Richiesta di recupero password ricevuta, a breve riceverai una mail con le istruzioni',
           'Successo!'
         );
-        setInterval(() => {
-          this.router.navigate(['/login']);
-        }, 3000);
       },
       (error) => {
         this.toastr.warning(
