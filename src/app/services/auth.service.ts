@@ -6,12 +6,16 @@ import { AuthRequest } from '../interfaces/AuthRequest';
 import { AuthResponse } from '../interfaces/AuthResponse';
 import { RegisterRequest } from '../interfaces/RegisterRequest';
 import { RegisterResponse } from '../interfaces/RegisterResponse';
+import SecureLS from "secure-ls";
+import {TokenCheckResponse} from "../interfaces/TokenCheckResponse";
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   api = new API();
+  cookie = new SecureLS();
 
   constructor(private http: HttpClient) {}
 
@@ -38,5 +42,24 @@ export class AuthService {
       accountTypeSelected: accountTypeSelected,
     };
     return this.http.post<RegisterResponse>(this.api.AUTH_REGISTER, json);
+  }
+
+  logoutDestroyToken(): boolean {
+    this.cookie.remove('token');
+    if (!this.cookie.get('token')) {
+      return true;
+    }
+    return false;
+  }
+
+  checkLoginIsTrue(): Observable<boolean> {
+    return this.checkTokenHttpCall().pipe(map(json => json.isValido));
+  }
+
+  checkTokenHttpCall():Observable<TokenCheckResponse> {
+    const json = {
+      token: this.cookie.get('token'),
+    }
+    return this.http.post<TokenCheckResponse>(this.api.TOKEN_CHECK, json);
   }
 }

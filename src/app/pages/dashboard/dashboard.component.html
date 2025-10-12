@@ -1,0 +1,87 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<div class="p-4 sm:ml-64">
+  <div class="md:mt-[50px] mt-[60px]">
+    <div class="w-[100%] bg-white border border-gray-200 rounded-lg shadow-sm">
+      <div class="p-5">
+        <a class="cursor-pointer" routerLink="/dashboard">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#411E62]">
+            Dashboard
+          </h5>
+        </a>
+        <p class="mb-0 font-normal text-gray-700">
+          Benvenuto nella tua Dashboard, in questa pagina puoi vedere i report delle tue analisi e delle fratture rilevate.<br>
+          Utilizzando la sidebar (il menù alla tua sinistra) puoi effettuare una nuova analisi di una lastra oppure vedere lo storico delle tue lastre presenti nell'archivio di Fracture Detector.
+        </p>
+        <br>
+        <table>
+          <tbody>
+          <tr>
+            <td class="p-[5px] text-[#411E62]"><b>Numero di analisi in cui è stata rilevata una frattura:</b></td>
+            <td class="p-[5px] text-gray-950 pl-[20px]">{{numeroAnalisiConFrattura}} analisi</td>
+          </tr>
+          <tr>
+            <td class="p-[5px] text-[#411E62]"><b>Numero di analisi in cui non è stata rilevata una frattura:</b></td>
+            <td class="p-[5px] text-gray-950 pl-[20px]">{{numeroAnalisiSenzaFrattura}} analisi</td>
+          </tr>
+          <tr>
+            <td class="p-[5px] text-[#411E62]"><b>Percentuale di accuratezza media delle analisi:</b></td>
+            <td class="p-[5px] text-gray-950 pl-[20px]">{{percentualeMediaAccuratezzaAnalisi}}%</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="p-2"></div>
+    </div>
+    <div class="md:grid md:grid-cols-2">
+      <div class="md:w-[98%] w-[100%] mt-[25px] bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="p-5">
+          <a class="cursor-pointer">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#411E62]">
+              Dettagli Utente
+            </h5>
+          </a>
+          <table>
+            <tbody>
+            <tr>
+              <td class="p-[5px] text-[#411E62]"><b>Nome:</b></td>
+              <td class="p-[5px] text-gray-950 pl-[20px]">{{name}}</td>
+            </tr>
+            <tr>
+              <td class="p-[5px] text-[#411E62]"><b>Cognome:</b></td>
+              <td class="p-[5px] text-gray-950 pl-[20px]">{{surname}}</td>
+            </tr>
+            <tr>
+              <td class="p-[5px] text-[#411E62]"><b>Email:</b></td>
+              <td class="p-[5px] text-gray-950 pl-[20px]">{{username}}</td>
+            </tr>
+            <tr>
+              <td class="p-[5px] text-[#411E62]"><b>Tipologia di account:</b></td>
+              <td class="p-[5px] text-gray-950 pl-[20px]">{{type}}</td>
+            </tr>
+            <tr>
+              <td class="p-[5px] text-[#411E62]"><b>Foto profilo:</b></td>
+              <td class="p-[5px] text-gray-950 pl-[20px]">
+                <img src="./assets/user-profile-foto.PNG" class="w-[100px]" alt="user-standard-image" />
+                <i>La funzionalità per aggiornare la propria foto sarà disponibile a breve</i>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="md:w-[100%] w-[100%] mt-[25px] bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="p-5">
+          <a class="cursor-pointer">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#411E62]">
+              Serie storica delle fratture
+            </h5>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

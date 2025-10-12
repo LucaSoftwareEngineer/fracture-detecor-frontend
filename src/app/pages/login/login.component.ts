@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
               this.cookie.set('password', this.password);
             }
 
-            setInterval(() => {
+            setTimeout(() => {
               this.router.navigate(['/dashboard']);
             }, 3000);
           }

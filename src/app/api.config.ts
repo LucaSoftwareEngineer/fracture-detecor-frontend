@@ -4,4 +4,6 @@ export class API {
   ACCOUNT_TYPE_LIST: string = 'http://localhost:8081/api/user/types/list';
   PASSWORD_RESET: string = 'http://localhost:8081/api/password/reset';
   PASSWORD_UPDATE: string = 'http://localhost:8081/api/password/update';
+  TOKEN_CHECK: string = 'http://localhost:8081/api/user/token/check';
+  USER_DETAILS: string = 'http://localhost:8081/api/user/details';
 }
