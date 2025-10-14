@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {UserDetails} from "../interfaces/UserDetails";
-import {API} from "../api.config";
-import SecureLS from "secure-ls";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { UserDetails } from '../../interfaces/UserDetails';
+import { API } from '../../api.config';
+import SecureLS from 'secure-ls';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserDetailsService {
-
   API = new API();
   cookie = new SecureLS();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUserDetails(): Observable<UserDetails> {
     let token = this.cookie.get('token');

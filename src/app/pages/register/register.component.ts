@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { AccountTypeService } from '../../services/account.type.service';
+import { AccountTypeService } from '../../services/account.type/account.type.service';
 import { AccountTypeResponse } from '../../interfaces/AccountTypeResponse';
 
 @Component({

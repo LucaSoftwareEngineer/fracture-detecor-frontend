@@ -1,5 +1,5 @@
 import { PasswordResetRequest } from './../../interfaces/PasswordResetRequest';
-import { ResetPasswordService } from './../../services/reset.password.service';
+import { ResetPasswordService } from './../../services/reset.password/reset.password.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';

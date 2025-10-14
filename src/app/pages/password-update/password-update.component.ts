@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ResetPasswordService } from '../../services/reset.password.service';
+import { ResetPasswordService } from '../../services/reset.password/reset.password.service';
 
 @Component({
   selector: 'app-password-update',

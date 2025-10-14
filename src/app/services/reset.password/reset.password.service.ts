@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { API } from '../api.config';
+import { API } from '../../api.config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PasswordResetRequest } from '../interfaces/PasswordResetRequest';
-import { PasswordUpdateResponse } from '../interfaces/PasswordUpdateResponse';
-import { PasswordUpdateRequest } from '../interfaces/PasswordUpdateRequest';
+import { PasswordResetRequest } from '../../interfaces/PasswordResetRequest';
+import { PasswordUpdateResponse } from '../../interfaces/PasswordUpdateResponse';
+import { PasswordUpdateRequest } from '../../interfaces/PasswordUpdateRequest';
 
 @Injectable({
   providedIn: 'root',
