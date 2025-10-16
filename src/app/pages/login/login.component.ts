@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
             data.token != null &&
             data.token != ''
           ) {
+            this.cookie.remove('token');
             this.cookie.set('token', data.token);
             this.toastr.success('Accesso effettuatto...', 'Successo!');
 
