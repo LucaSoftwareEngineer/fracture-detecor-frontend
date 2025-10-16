@@ -6,4 +6,5 @@ export class API {
   PASSWORD_UPDATE: string = 'http://localhost:8081/api/password/update';
   TOKEN_CHECK: string = 'http://localhost:8081/api/user/token/check';
   USER_DETAILS: string = 'http://localhost:8081/api/user/details';
+  ANALISI_FRATTURA_NEW: string = 'http://localhost:8081/api/analisi/frattura/new';
 }

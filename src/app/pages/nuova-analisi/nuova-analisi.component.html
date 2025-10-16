@@ -19,5 +19,105 @@
         </p>
       </div>
     </div>
+
+    <div class="md:grid md:grid-cols-2">
+      <div class="md:w-[98%] w-[100%] mt-[25px] bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="bg-[#411E62] p-3 rounded-t-lg">
+          <a class="cursor-pointer">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
+              Modulo nuova analisi
+            </h5>
+          </a>
+        </div>
+        <div class="p-5">
+          <form enctype="multipart/form-data" (ngSubmit)="beginAnalisiFrattura()">
+            <table class="w-[100%]">
+            <tbody>
+            <tr>
+              <td class="p-[5px] text-[#411E62]"><b>Data dell'analisi:</b></td>
+              <td class="p-[5px] text-gray-950 pl-[20px]">
+                <input
+                  [(ngModel)]="dataAnalisi"
+                  name="dataAnalisi"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#411E62] focus:border-[#411E62] block w-full p-2.5"
+                  type="date" />
+              </td>
+            </tr>
+            <tr>
+              <td class="p-[5px] pt-[10px] text-[#411E62]"><b>File (lastra):</b></td>
+              <td class="p-[5px] pt-[10px] text-gray-950 pl-[20px]">
+                <input
+                  (change)="fileLastraSelezionato($event)"
+                  type="file"
+                  name="fileLastra"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="pt-[10px]">
+                @if (fase == 0 || fase == 2) {
+                  <button type="submit" class="w-[100%] focus:outline-none text-white bg-[#411E62] hover:bg-purple-300 cursor-pointer focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Analizza lastra</button>
+                } @else if (fase == 1) {
+                  <button disabled type="submit" class="w-[100%] focus:outline-none text-white bg-gray-400 rounded-lg text-sm px-5 py-2.5 mb-2">Analizza lastra</button>
+                }
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <i>*Iniziando l'analisi della lastra, il documento ed i risultati dell'analisi verranno salvati in storico archivio</i>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          </form>
+        </div>
+      </div>
+      <div class="md:w-[100%] w-[100%] mt-[25px] bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="bg-[#411E62] p-3 rounded-t-lg">
+          <a class="cursor-pointer">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
+              Risultati dell'analisi
+            </h5>
+          </a>
+        </div>
+        <div class="p-5">
+          @if (fase == 0) {
+          <div class="w-[100%] text-center">
+            <img
+              src="assets/avviso.png"
+              alt="avviso.png"
+              class="w-[130px] h-[130px] block mx-auto" />
+            <i>Dopo aver compilato il modulo clicca su "Analizza lastra" per iniziare l'analisi della lastra e visualizzare in questo cardi risultati.</i>
+          </div>
+          } @else if (fase == 1) {
+          <div class="w-[100%] text-center">
+            <img
+              src="assets/caricamento.gif"
+              alt="caricamento.gif"
+              class="w-[150px] h-[150px] block mx-auto" />
+            <i>Analisi della frattura in corso può essere necessario attendere fino ad un minuto</i>
+          </div>
+          } @else if (fase == 2) {
+            <div class="w-[100%] text-center">
+              <img
+                src="assets/completato.PNG"
+                alt="caricamento.gif"
+                class="w-[150px] h-[150px] block mx-auto" />
+              <b class="text-[#411E62]">Processo di analisi completato</b>
+              <br>
+              @if (fratturaPresente) {
+                <i>Attenzione! è stata <b class="text-red-800">rilevata una frattura</b> nella lastra</i>
+              } @else {
+                <i>Ottime notizie! non è stata rilevato <b class="text-green-700">nessun danno</b> nella lastra</i>
+              }
+            </div>
+          }
+
+        </div>
+
+      </div>
+    </div>
+
+
   </div>
 </div>
