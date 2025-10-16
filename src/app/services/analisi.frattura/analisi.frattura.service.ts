@@ -4,6 +4,7 @@ import { AnalisiFratturaResponse } from "../../interfaces/AnalisiFratturaRespons
 import { Observable } from "rxjs";
 import { API } from "../../api.config";
 import SecureLS from "secure-ls";
+import {AnalisiFratturaItemStorico} from "../../interfaces/AnalisiFratturaItemStorico";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,25 @@ export class AnalisiFratturaService {
       payload,
       { headers: httpHeaders }
     );
+  }
+
+  callHttpStoricoAnalisiLastre(id:number): Observable<AnalisiFratturaItemStorico[]> {
+    const currentToken = this.cookie.get('token');
+    const httpHeaders = new HttpHeaders({
+      'Authorization': `Bearer ${currentToken}`
+    });
+
+    return this.http.get<AnalisiFratturaItemStorico[]>(
+      this.api.ANALISI_FRATTURA_STORICO.concat(id.toString()),
+      { headers: httpHeaders }
+    );
+  }
+
+  callHttpEliminaAnalisiDaStorico(idAnalisi:number, idUser:number): Observable<any>{
+    const currentToken = this.cookie.get('token');
+    const httpHeaders = new HttpHeaders({
+      'Authorization': `Bearer ${currentToken}`
+    });
+    return this.http.delete<any>(this.api.ANALISI_FRATTURA_DELETE.concat(idAnalisi.toString().concat('/').concat(idUser.toString())), { headers: httpHeaders });
   }
 }

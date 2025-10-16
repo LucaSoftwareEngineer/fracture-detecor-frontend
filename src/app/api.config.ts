@@ -7,4 +7,7 @@ export class API {
   TOKEN_CHECK: string = 'http://localhost:8081/api/user/token/check';
   USER_DETAILS: string = 'http://localhost:8081/api/user/details';
   ANALISI_FRATTURA_NEW: string = 'http://localhost:8081/api/analisi/frattura/new';
+  ANALISI_FRATTURA_STORICO: string = 'http://localhost:8081/api/analisi/frattura/';
+  CLOUD_LASTRE: string = 'http://localhost:8081/content/';
+  ANALISI_FRATTURA_DELETE: string = 'http://localhost:8081/api/analisi/frattura/delete/';
 }
