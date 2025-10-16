@@ -17,12 +17,15 @@ import SecureLS from "secure-ls";
 export class DashboardComponent implements OnInit {
   numeroAnalisiConFrattura: number = 0;
   numeroAnalisiSenzaFrattura: number = 0;
-  percentualeMediaAccuratezzaAnalisi: number = 0;
+  numeroAnalisiTotali: number = 0;
   name: string = '';
   surname: string = '';
   username: string = '';
   type: string = '';
   cookie = new SecureLS();
+  numeroAnalisiPerMeseDiAnnoCorrente = [
+    0,0,0,0,0,0,0,0,0,0,0,0
+  ];
 
   constructor(
     private router: Router,
@@ -37,8 +40,17 @@ export class DashboardComponent implements OnInit {
       this.username = json.username;
       this.numeroAnalisiConFrattura = json.numeroAnalisiConFrattura;
       this.numeroAnalisiSenzaFrattura = json.numeroAnalisiSenzaFrattura;
-      this.percentualeMediaAccuratezzaAnalisi =
-        json.percentualeMediaAccuratezzaAnalisi;
+      this.numeroAnalisiTotali = json.numeroAnalisiTotali;
+      this.numeroAnalisiPerMeseDiAnnoCorrente = json.conteggiAnalisi;
+
+      this.chartData = {
+        ...this.chartData,
+        datasets: [{
+          ...this.chartData.datasets[0],
+          data: this.numeroAnalisiPerMeseDiAnnoCorrente
+        }]
+      };
+
       if (json.type == 'Doctor') {
         this.type = 'Utente Medico';
       } else {
@@ -47,13 +59,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-
   chartType: ChartType = 'bar';
   chartData: ChartData<'bar'> = {
     labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
     datasets: [{
       label: `Numero di analisi effettuate nel mese dell'anno corrente`,
-      data: [1, 4, 0, 4, 0, 7, 3, 6, 7, 0, 0, 0],
+      data: this.numeroAnalisiPerMeseDiAnnoCorrente,
       backgroundColor: 'rgba(65, 30, 98)',
     }]
   };

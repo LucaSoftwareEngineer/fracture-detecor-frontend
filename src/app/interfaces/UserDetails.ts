@@ -4,7 +4,8 @@ export interface UserDetails {
   name: string;
   surname: string;
   type: string;
+  numeroAnalisiTotali: number;
   numeroAnalisiConFrattura: number;
   numeroAnalisiSenzaFrattura: number;
-  percentualeMediaAccuratezzaAnalisi: number;
+  conteggiAnalisi: number[];
 }
